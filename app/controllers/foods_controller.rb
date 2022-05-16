@@ -6,8 +6,12 @@ class FoodsController < ApplicationController
 
     def create
       food = Food.create(food_params)
+    if food.valid?
       render json: food
+    else
+      render json: food.errors, status: 422
     end
+  end
 
     def update
       food = Food.find(params[:id])
